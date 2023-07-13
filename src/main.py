@@ -71,13 +71,15 @@ def crossover():
     while selection_1 != selection_2:
         selection_2 = random.randint(0, population_size-1)
     crossover_point = random.randint(0, 23)
-    for i in range(len(population[selection_1][0])):
+    
+    for i in range(len(population[selection_1][0])): # 12
         child.append([])
-        for j in range(crossover_point):
-            child[i].append(population[selection_2][j][i])
+        for j in range(0,crossover_point):
+            child[i].append(population[selection_2][j][i]) 
         for j in range(crossover_point, len(population[selection_1])):
             child[i].append(population[selection_1][j][i])
     child_fitness = fitness_function(child)
+    
     #TODO: local search
     if fitnes_of_population[selection_1] > fitnes_of_population[selection_2]:
         if child_fitness < fitnes_of_population[selection_1]:
