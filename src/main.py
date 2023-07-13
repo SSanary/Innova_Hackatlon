@@ -9,24 +9,25 @@ population_size = 100
 population = []
 fitnes_of_population = []
 
+path = "C:\\Users\\elifn\\OneDrive\\Belgeler\\GitHub\\Innova_Future_Istanbul_Hackatlon\\Innova_Hackaatlon\\assets\\target-file.xlsx"
 
 def readData():
     # Getting the data from beklenen sheet
-    ws = xw.Book("C:\\Users\\elifn\\OneDrive\\Belgeler\\GitHub\\Innova_Future_Istanbul_Hackatlon\\assets\\target-file.xlsx").sheets['beklenen']
+    ws = xw.Book(path).sheets['beklenen']
     for letter in range(66, 90):
         beklenen.append([])
         for i in range(2,14):
             beklenen[letter-66].append(ws.range(str(chr(letter)) + str(i)).value)
         
     # Getting the data from metrics sheet
-    ws = xw.Book("C:\\Users\\elifn\\OneDrive\\Belgeler\\GitHub\\Innova_Future_Istanbul_Hackatlon\\assets\\target-file.xlsx").sheets['metrics']
+    ws = xw.Book(path).sheets['metrics']
     for letter in range(67, 91):
         metrics.append([])
         for i in range(2,14):
             metrics[letter-67].append(ws.range(str(chr(letter)) + str(i)).value)
 
     # Getting the data from data_metrics sheet
-    ws = xw.Book("C:\\Users\\elifn\\OneDrive\\Belgeler\\GitHub\\Innova_Future_Istanbul_Hackatlon\\assets\\target-file.xlsx").sheets['data_metrics']
+    ws = xw.Book(path).sheets['data_metrics']
     for letter in range(66, 90):
         data_metrics.append([])
         for i in range(2,13):
