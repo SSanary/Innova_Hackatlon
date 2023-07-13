@@ -8,6 +8,8 @@ data_metrics=[]
 population_size = 100
 population = []
 fitnes_of_population = []
+best_individual = []
+best_score = 1500
 
 path = "C:\\Users\\elifn\\OneDrive\\Belgeler\\GitHub\\Innova_Future_Istanbul_Hackatlon\\Innova_Hackaatlon\\assets\\target-file.xlsx"
 
@@ -44,6 +46,9 @@ def fitness_function(individual):
     for i in range(len(data_metrics)):
         for j in range(len(data_metrics[i])):
             fitness += fitness + ((data_metrics[i][j]) * selection_count_for_outputs[i])/5
+    if fitness/23 < best_score:
+        best_score = fitness
+        best_individual = individual
     return fitness/24
 
 def createInitialPopulation():
@@ -73,18 +78,31 @@ def crossover():
             child[i].append(population[selection_1][i][j])
     child_fitness = fitness_function(child)
     #TODO: local search
-    if child_fitness < fitnes_of_population[selection_1]:
-        population[selection_1] = child
-        fitnes_of_population[selection_1] = child_fitness
+    if fitnes_of_population[selection_1] > fitnes_of_population[selection_2]:
+        if child_fitness < fitnes_of_population[selection_1]:
+            population[selection_1] = child
+            fitnes_of_population[selection_1] = child_fitness
+        elif child_fitness < fitnes_of_population[selection_2]:
+            population[selection_2] = child
+            fitnes_of_population[selection_2] = child_fitness
+    else:
+        if child_fitness < fitnes_of_population[selection_2]:
+            population[selection_2] = child
+            fitnes_of_population[selection_2] = child_fitness
+        elif child_fitness < fitnes_of_population[selection_1]:
+            population[selection_1] = child
+            fitnes_of_population[selection_1] = child_fitness
  
 def geneticAlgorithm():
     createInitialPopulation()
-    #crossover()
+    for i in range(100):
+        crossover()
 
 
 def main():
     readData()
     geneticAlgorithm()
+    print(best_individual)
     
     
 main()
