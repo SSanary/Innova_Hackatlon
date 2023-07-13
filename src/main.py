@@ -46,7 +46,7 @@ def fitness_function(individual):
                 selection_count_for_outputs[i] += 1
     for i in range(len(data_metrics)):
         for j in range(len(data_metrics[i])):
-            fitness += fitness + ((data_metrics[i][j]) * selection_count_for_outputs[i])/5
+            fitness += fitness + ((data_metrics[i][j]) * selection_count_for_outputs[j])/5
     if fitness/23 < Best_Score:
         Best_Score = fitness
         best_individual = individual
@@ -71,12 +71,12 @@ def crossover():
     while selection_1 != selection_2:
         selection_2 = random.randint(0, population_size-1)
     crossover_point = random.randint(0, 23)
-    for i in range(12):
+    for i in range(len(population[selection_1][0])):
         child.append([])
         for j in range(crossover_point):
-            child[i].append(population[selection_2][i][j])
-        for j in range(crossover_point, 24):
-            child[i].append(population[selection_1][i][j])
+            child[i].append(population[selection_2][j][i])
+        for j in range(crossover_point, len(population[selection_1])):
+            child[i].append(population[selection_1][j][i])
     child_fitness = fitness_function(child)
     #TODO: local search
     if fitnes_of_population[selection_1] > fitnes_of_population[selection_2]:
