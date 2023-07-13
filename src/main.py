@@ -9,9 +9,9 @@ population_size = 100
 population = []
 fitnes_of_population = []
 best_individual = []
-best_score = 1500
+Best_Score = 1500
 
-path = "C:\\Users\\elifn\\OneDrive\\Belgeler\\GitHub\\Innova_Future_Istanbul_Hackatlon\\Innova_Hackaatlon\\assets\\target-file.xlsx"
+path = "C:\\Users\\elifn\\OneDrive\\Belgeler\\GitHub\\Innova_Future_Istanbul_Hackatlon\\Innova_Hackatlon\\assets\\target-file.xlsx"
 
 def readData():
     # Getting the data from beklenen sheet
@@ -37,6 +37,7 @@ def readData():
 
 def fitness_function(individual):
     fitness = 0
+    global Best_Score
     selection_count_for_outputs = []
     for i in range(len(individual)):
         selection_count_for_outputs.append(0)
@@ -46,8 +47,8 @@ def fitness_function(individual):
     for i in range(len(data_metrics)):
         for j in range(len(data_metrics[i])):
             fitness += fitness + ((data_metrics[i][j]) * selection_count_for_outputs[i])/5
-    if fitness/23 < best_score:
-        best_score = fitness
+    if fitness/23 < Best_Score:
+        Best_Score = fitness
         best_individual = individual
     return fitness/24
 
@@ -103,6 +104,5 @@ def main():
     readData()
     geneticAlgorithm()
     print(best_individual)
-    
     
 main()

@@ -1,3 +1,1 @@
-    print(fitness)
-            print(data_metrics[i][j])
-            print
+best_score = 1500
